@@ -140,6 +140,13 @@ Mat preprocess_img(cv::Mat& img, int input_w, int input_h,int & padw,int& padh) 
     return out;
 }
 
+static float vector_2d_angle(cv::Point p1,cv::Point p2) {
+  float angle = 0.0;
+  float radian_value = acos((p1.x*p2.x+p1.y*p2.y)/(sqrt(p1.x*p1.x+p1.y*p1.y)*sqrt(p2.x*p2.x+p2.y*p2.y)));
+  angle = 180*radian_value/3.1415;
+  return angle;
+ 
+}
 
 static void draw_objects(const cv::Mat& image, const std::vector<vector<KEYPOINT>>& ans)
 {
@@ -263,6 +270,20 @@ static void draw_objects(const cv::Mat& image, const std::vector<vector<KEYPOINT
 
                 cv::circle(image, keypoint.p, 3, cv::Scalar(color[0],color[1],color[2]), -1);
             }
+
+            //calculate angle
+            // auto youshou_youzhou = keypoints[10].p  -keypoints[8].p;
+            // auto youzhou_youjian = keypoints[6].p - keypoints[8].p;
+            // auto youzhou = keypoints[8].p;
+            // float ang = vector_2d_angle( youshou_youzhou,youzhou_youjian);
+
+            // String text = to_string((int)ang)+ "^o";
+            // int fontFace = FONT_HERSHEY_SCRIPT_SIMPLEX;
+            // double fontScale = 1;
+            // int thickness = 1;
+            // putText(image, text, youzhou, fontFace, fontScale,
+            // Scalar(188,0,255), thickness, 1);
+        
             cout<<"-------------------------------"<<endl;
     }
 
